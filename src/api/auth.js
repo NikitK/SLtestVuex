@@ -9,11 +9,11 @@ export default {
       throw { success: false, errors: response.errors }
     })
   },
-  get() {
-    return axios.get('/tasks').then(response => {
-      return { success: true, user: response.data }
-    }, response => {
-      throw { success: false, errors: response.errors }
-    })
-  }
+//   get() {
+//     return axios.get('/tasks').then(response => {
+//       return { success: true, tasks: response.data }
+//     }, response => {
+//       throw { success: false, errors: response.errors }
+//     })
+//   }
 }

@@ -1,12 +1,13 @@
 <template>
     <div>
         <ul>
-            <li>{{this.userName}}</li>
+            <li>{{this.user.name}}</li>
             <li @click="logOut">Logout</li>
         </ul>
     </div>
 </template>
 <script>
+import token from '@/utils/storage/token'
 import {mapGetters} from "vuex"
 export default {
     name:"logout",
@@ -16,12 +17,12 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(["userName"])
+        ...mapGetters(["user"])
     },
     methods:{
         logOut(){
-            localStorage.removeItem('user') 
-            this.$store.commit('updateStore');           
+            token.remove()
+            this.$store.dispatch('logout');           
             this.$router.push('/login')
         }
     }

@@ -1,40 +1,49 @@
 import * as storage from '@/utils/storage'
 import * as api from '@/api/'
-export default {
-  actions: {
-    login({ commit, dispatch }, data) {
-      return api.auth.login(data).then(response => {
-        storage.token.set(response.user.api_token)
-        commit('setUser', response.user)
-  
-        dispatch('getTasks')
-      })
-    },
-    // getTasks({ commit }) {
-    //   return api.auth.get().then(response => {
-    //     commit("setUser", response.data)
-    //   })
-    // },
-  },
-  mutations: {
 
-    updateStore(state) {
-       state.user = JSON.parse(localStorage.getItem('user') || '[]')
-    },
-      setUser(state, user) {
-        state.user = user
-      }
-    
+// initial state
+const state = {
+  user: storage.user.get()
+}
+// getters
+const getters = {
+  user: state => state.user,
+}
+
+// actions
+const actions = {
+  // Methods allowed from vuex in all application.
+  login({ commit }, data) {
+    return api.auth.login(data).then(response => {
+      storage.token.set(response.user.api_token)
+      storage.user.set(response.user)
+      commit('setUser', response.user)
+
+      // dispatch('getUser')
+    })
   },
-  state: {
-    user: JSON.parse(localStorage.getItem('user') || '[]')
+  // getUser({ commit }) {
+  //   return api.auth.get().then(response => {
+  //     commit("setUser", response.user)
+  //   })
+  // },
+  logout({ commit }) {
+    commit('setUser', false)
+    storage.token.remove()
+    storage.user.remove()
   },
-  getters: {
-    userName(state) {
-      return state.user.name
-    },
-    userToken(state) {
-      return state.user.api_token
-    }
+}
+
+// mutations
+const mutations = {
+  setUser(state, user) {
+    state.user = user
   }
+}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
 }

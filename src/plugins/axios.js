@@ -15,11 +15,12 @@ axios.defaults.baseURL = url + '/api/common/'
 Vue.prototype.$baseURL = url
 
 axios.interceptors.response.use((response) => {
+  store.commit('setUser',response.user); 
   return response
 }, (error) => {
   if (error.response.status === 401) {
     token.remove()
-    store.commit('updateStore');  
+    store.commit('setUser' ,false);  
     router.push({ name: "login" })
     
   }
@@ -29,8 +30,9 @@ axios.interceptors.response.use((response) => {
 let auth = token.get()
 if (auth) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth
-  store.dispatch('getTasks')
+  // store.dispatch('getUser')
   console.log(token.get())
 }else{
   console.log(token.get())
+  router.push({ name: "login" })
 }
