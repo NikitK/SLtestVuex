@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import {mapGetters ,mapMutations} from 'vuex'
+// import axios from "axios";
+import {mapGetters} from 'vuex'
 import listItem from "@/components/list-item.vue";
 
 export default {
@@ -38,26 +38,24 @@ export default {
   },
   beforeMount() {
     // const token = localStorage.getItem("token");
-    const URL = "https://api.grtsk-cmp.studio-luck.ru/api/common/tasks";
-    const AuthStr = "Bearer " + this.userToken;
-    axios
-      .get(URL, { headers: { Authorization: AuthStr } })
-      .then(response => {
-        // If request is good...
-        console.log(response.data);
-        this.tasks = response.data.data;
-        this.updateStore()
-        console.log(this.tasks);
-      })
-      .catch(error => {
-        if (error.response.status === 401) {
-          console.log("error " + error);
-          this.$router.push({ name: "Login" });
-        }
-      });
+    // const URL = "https://api.grtsk-cmp.studio-luck.ru/api/common/tasks";
+    // const AuthStr = "Bearer " + this.userToken;
+    // axios
+    //   .get(URL, { headers: { Authorization: AuthStr } })
+    //   .then(response => {
+    //     // If request is good...
+    //     console.log(response.data);
+    //     this.tasks = response.data.data;
+    //     console.log(this.tasks);
+    //   })
+    //   .catch(error => {
+    //     if (error.response.status === 401) {
+    //       console.log("error " + error);
+    //       this.$router.push({ name: "Login" });
+    //     }
+    //   });
   },
   methods: {
-    ...mapMutations(["updateStore"]),
     alertId(idToAlert) {
       alert("id=" + idToAlert);
     }

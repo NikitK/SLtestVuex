@@ -9,6 +9,7 @@ import store from './store'
 import '@/plugins/router'
 import router from './router/index'
 
+import '@/plugins/axios'
 
 //Call vuetify plugin with custom settings
 import vuetify from '@/plugins/vuetify'

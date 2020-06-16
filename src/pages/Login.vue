@@ -27,10 +27,9 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex"
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   mixins: [validationMixin],
@@ -72,26 +71,30 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["updateStore"]),
     submit() {
       this.$v.$touch();
           let body = {
         password: this.name,
         email: this.email
       }
-        axios.post(
-          "https://api.grtsk-cmp.studio-luck.ru/api/common/login",
-          body
-        ).then(response=> {
-          localStorage.setItem('token',response.data.api_token);
-          localStorage.setItem('name',response.data.name);
-           localStorage.setItem('user',JSON.stringify(response.data));
-           console.log(response.data)
-           this.updateStore()
-            this.$router.push({ name: 'Main'})
-        }, errors=>{
-          console.log(errors)
-        });
+              this.$store.dispatch('login', body).then(() => {
+          let redirect = '/'
+          this.$router.push(redirect)
+        }, response => {
+          this.errors = response.errors
+        })
+        // axios.post(
+        //   "https://api.grtsk-cmp.studio-luck.ru/api/common/login",
+        //   body
+        // ).then(response=> {
+
+        //    localStorage.setItem('user',JSON.stringify(response.data));
+        //    console.log(response.data)
+        //    this.$store.commit('updateStore');
+        //     this.$router.push({ name: 'Main'})
+        // }, errors=>{
+        //   console.log(errors)
+        // });
 
 
 

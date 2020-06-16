@@ -10,7 +10,7 @@ export default {
     })
   },
   get() {
-    return axios.get('/profile').then(response => {
+    return axios.get('/tasks').then(response => {
       return { success: true, user: response.data }
     }, response => {
       throw { success: false, errors: response.errors }

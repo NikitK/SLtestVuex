@@ -7,7 +7,7 @@
     </div>
 </template>
 <script>
-import {mapGetters , mapMutations} from "vuex"
+import {mapGetters} from "vuex"
 export default {
     name:"logout",
     data(){
@@ -15,16 +15,13 @@ export default {
             cliName:''
         }
     },
-    beforeMount(){
-this.updateStore()
-    },
     computed:{
         ...mapGetters(["userName"])
     },
     methods:{
-        ...mapMutations(['updateStore']),
         logOut(){
-            localStorage.removeItem('user')            
+            localStorage.removeItem('user') 
+            this.$store.commit('updateStore');           
             this.$router.push('/login')
         }
     }
