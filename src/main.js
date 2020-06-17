@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from '@/App'
 
 //Call vuex plugin and modules
-import '@/plugins/vuex'
 import store from './store'
 
 //Call vue-router plugin and list of routes

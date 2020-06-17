@@ -73,31 +73,19 @@ export default {
   methods: {
     submit() {
       this.$v.$touch();
-          let body = {
+      let body = {
         password: this.name,
         email: this.email
-      }
-              this.$store.dispatch('login', body).then(() => {
-          let redirect = '/'
-          this.$router.push(redirect)
-        }, response => {
-          this.errors = response.errors
-        })
-        // axios.post(
-        //   "https://api.grtsk-cmp.studio-luck.ru/api/common/login",
-        //   body
-        // ).then(response=> {
-
-        //    localStorage.setItem('user',JSON.stringify(response.data));
-        //    console.log(response.data)
-        //    this.$store.commit('updateStore');
-        //     this.$router.push({ name: 'Main'})
-        // }, errors=>{
-        //   console.log(errors)
-        // });
-
-
-
+      };
+      this.$store.dispatch("login", body).then(
+        () => {
+          let redirect = "/";
+          this.$router.push(redirect);
+        },
+        response => {
+          this.errors = response.errors;
+        }
+      );
     },
     clear() {
       this.$v.$reset();

@@ -1,26 +1,25 @@
 <template>
     <div>
         <ul>
-            <li>{{this.user.name}}</li>
+            <li>{{this.cliName}}</li>
             <li @click="logOut">Logout</li>
         </ul>
     </div>
 </template>
 <script>
 import token from '@/utils/storage/token'
-import {mapGetters} from "vuex"
+import user from '@/utils/storage/user'
+
 export default {
     name:"logout",
     data(){
         return{
-            cliName:''
+            cliName: user.get().name
         }
-    },
-    computed:{
-        ...mapGetters(["user"])
     },
     methods:{
         logOut(){
+
             token.remove()
             this.$store.dispatch('logout');           
             this.$router.push('/login')

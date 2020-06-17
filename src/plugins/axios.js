@@ -30,9 +30,7 @@ axios.interceptors.response.use((response) => {
 let auth = token.get()
 if (auth) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth
-  // store.dispatch('getUser')
-  console.log(token.get())
+  router.push({ name: "Main" })
 }else{
-  console.log(token.get())
   router.push({ name: "login" })
 }
