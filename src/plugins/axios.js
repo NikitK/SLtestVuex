@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import router from '@/router'
+// import router from '@/router'
 import store from '@/store'
 
 import token from '@/utils/storage/token'
@@ -21,7 +21,6 @@ axios.interceptors.response.use((response) => {
   if (error.response.status === 401) {
     token.remove()
     store.commit('setUser' ,false);  
-    router.push({ name: "login" })
     
   }
   return Promise.reject(error.response.data)
@@ -30,7 +29,4 @@ axios.interceptors.response.use((response) => {
 let auth = token.get()
 if (auth) {
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + auth
-  router.push({ name: "Main" })
-}else{
-  router.push({ name: "login" })
 }

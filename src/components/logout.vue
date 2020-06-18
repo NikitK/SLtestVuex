@@ -22,7 +22,7 @@ export default {
 
             token.remove()
             this.$store.dispatch('logout');           
-            this.$router.push('/login')
+            this.$router.push({name:'Login'})
         }
     }
 }

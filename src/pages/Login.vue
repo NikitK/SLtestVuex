@@ -29,7 +29,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
-// import axios from "axios";
+
 
 export default {
   mixins: [validationMixin],
@@ -79,8 +79,7 @@ export default {
       };
       this.$store.dispatch("login", body).then(
         () => {
-          let redirect = "/";
-          this.$router.push(redirect);
+          this.$router.push({name:'Main'});
         },
         response => {
           this.errors = response.errors;
