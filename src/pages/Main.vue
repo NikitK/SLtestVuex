@@ -44,9 +44,10 @@
           justify="center"
         >
           <v-col>
-        <projectlist />
+        <projectlist ref="cl" />
           </v-col>
         </v-row>
+        <v-btn @click='test'>test</v-btn>
       </v-container>
     </v-content>
 
@@ -68,9 +69,11 @@ import logout from "@/components/logout.vue";
       drawer: null,
       tasks:[]
     }),
-    created () {
-      this.$vuetify.theme.dark = false
-    },
+    methods:{
+      test(){
+        this.$refs.cl.comsoleId()
+      }
+    }
   }
 </script>
 <style scoped>

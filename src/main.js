@@ -13,7 +13,8 @@ import '@/plugins/axios'
 //Call vuetify plugin with custom settings
 import vuetify from '@/plugins/vuetify'
 
-
+import '@/mixins/api'
+import '@/mixins/helpers'
 
 
 // Disable message about production tip in console

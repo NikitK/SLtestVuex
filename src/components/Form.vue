@@ -83,7 +83,6 @@
       ],
       checkbox: false,
     }),
-
     methods: {
       validate () {
         this.$refs.form.validate()
